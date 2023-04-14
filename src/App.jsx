@@ -7,16 +7,10 @@ const { Search } = Input;
 
 const App = () => {
   const userList = useSelector((state) => state.users.value)
-  const onSearch = (value) => console.log(value)
-
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [newUsername, setNewUsername] = useState('');
-
-  const restPropsUserCard = {
-      setNewUsername: setNewUsername,
-      newUsername: newUsername
-  }
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
+  const [newUsername, setNewUsername] = useState('')
+  const onSearch = (event) =>  setUsername(event.target.value)
 
   return (
     <div className="App">
