@@ -1,11 +1,22 @@
 import './styles/App.css'
 import { Input, Button } from 'antd';
 import { useSelector } from "react-redux";
+import UserCard from "./components/UserCard/UserCard";
+import { useState } from "react";
 const { Search } = Input;
 
 const App = () => {
   const userList = useSelector((state) => state.users.value)
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => console.log(value)
+
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [newUsername, setNewUsername] = useState('');
+
+  const restPropsUserCard = {
+      setNewUsername: setNewUsername,
+      newUsername: newUsername
+  }
 
   return (
     <div className="App">
@@ -23,9 +34,19 @@ const App = () => {
             <Button type="primary" danger> Add User </Button>
         </div>
         <div className='displayUsers'>
-            {userList.map((user) => (
-                <h1> { user.name } </h1>
-            ))}
+            {userList.map((user) => {
+                const { name, username, id } = user
+                return (
+                     <UserCard
+                        key={id}
+                        setNewUsername={setNewUsername}
+                        newUsername={newUsername}
+                        name={name}
+                        username={username}
+                        id={id}
+                    />
+                )
+            })}
         </div>
     </div>
   );
